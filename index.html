@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="shortcut icon" href="./Images/trello-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Trello | Home</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+
+    <div class="background-img"></div>
+
+    <nav class="section-card more-padding bg-white">
+        <div class="container-fluid">
+            
+            <!-- Left action buttons -->
+            <div class="nav-action-container">
+                <a class="navbar-action-btn" href="#"><img class="nav-icons" src="./Images/home.png" alt="Home button"></a>
+                <div class="navbar-create-board-btn navbar-action-btn">
+                    <img class="nav-icons" src="./Images/trello-mark-white.png" alt="Board icon">
+                    <span>Boards</span>
+                </div>
+                <div class="navbar-action-btn flex" id="navbar-create-board"><i class="fa fa-plus flex"></i></div>
+            </div>
+            
+
+            <!-- Trello Logo -->
+            <div class="logo navbar-logo">
+                <a href="./index.html"><img src="./Images/trello-white.svg" alt="Trello Logo"/></a>
+            </div>
+
+
+            <!-- Right action buttons -->
+            <div class="nav-action-container right-nav-action-container">
+                <!-- <a class="navbar-action-btn flex" href="#"><i class="fa fa-plus flex"></i></a> -->
+                <div class="navbar-create-board-btn navbar-action-btn nav-profile-btn">
+                    <i class="fa fa-user flex"></i>
+                    <span>Abhishek</span>
+                </div>
+            </div>
+        
+        </div>
+    </nav>
+
+
+    <!-- Body -->
+    <div class="container-fluid body-container">
+        <aside>
+            <div class="aside-inner section-card">
+                
+                <ul>
+                    <li class="li-highlighted">  
+                        <div>
+                            <i class="fa fa-th-large"></i>
+                            <span>
+                                Boards
+                            </span> 
+                        </div>  
+                    </li>
+                    <li>  
+                        <div>
+                            <i class="fa fa-home"></i>
+                            <span>
+                                Home
+                            </span> 
+                        </div>  
+                    </li>
+                    <li>  
+                        <div>
+                            <i class="fa fa-users"></i>                            
+                            <span>
+                                Members
+                            </span> 
+                        </div>  
+                    </li>
+                    <li>  
+                        <div>
+                            <i class="fa fa-users"></i>                            
+                            <span>
+                                Templates
+                            </span> 
+                        </div>  
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <section>
+            <div class="section-card board-body">
+                <div class="boards-heading">
+                    Boards
+                </div>
+                <div class="boards-container">
+                   
+                    <!-- <div class="card">
+                        <div class="card-heading">
+                            Testing Board
+                        </div>
+                        <div class="del-board-btn">
+                            <i class="fa fa-trash trash-btn ft-white"></i>
+                            <i class="fa fa-edit ft-white"></i>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">
+                            Testing Board
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-heading">
+                            Testing Board
+                        </div>
+                    </div> -->
+                    
+                    <div class=" card create-new" id="create-new-card">
+                        <div class="card-heading create-1new-heading">
+                            Create a new board
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- form to create board -->
+
+    <!-- <div class="new-board-form-container">
+        <div class="new-board-form-wrapper">
+            <form action="">
+                <input type="text" placeholder="Board name" name="boardName" id='boardName'>
+                <div class="create-board-btn-container">
+                    <input type="submit" id='submit-board-name' value="Create">
+                    <input type="submit" id='cancel' value="Cancel">
+                </div>
+            </form>
+        </div>
+    </div> -->
+
+
+
+
+
+    <!-- SCRIPTS -->
+    <script type="module" src="./js/boards/index.js" defer></script>
+
+</body>
+</html>
