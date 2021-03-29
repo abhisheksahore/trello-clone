@@ -18,15 +18,7 @@ const list = (name, id) => {
                         </div>
                     </div>
                     `;
-                    // <div class="new-board-form-wrapper add-card-form-container">
-                    //     <form action="">
-                    //         <input type="text" placeholder="Card name" name="CardName" id='CardName'>
-                    //         <div class="create-board-btn-container">
-                    //             <input type="submit" id='submit-card-name' value="Add">
-                    //             <input type="submit" id='cancel' value="Cancel">
-                    //         </div>
-                    //     </form>
-                    // </div>`;
+                    
 
     document.querySelector('.lists-container').insertBefore(list, document.querySelector('.lists-container').lastElementChild);
 }

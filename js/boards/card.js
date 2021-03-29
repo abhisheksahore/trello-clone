@@ -34,44 +34,9 @@ function card() {
             </div>
         </div>
 
-
+    </div>
         <!-- checklists -->
-        <div class="new-board-form-wrapper add-card-form-container list-card-desc-container">
-            <div class="desc-heading-container">
-                <div class="list-card-heading">
-                    <i class="fa fa-list-ul va-mid"></i>
-                    <div class="list-card-name-container">
-                        <p>Checklist</p>
-                    </div>
-                </div>
-                <div class="desc-edit-btn">
-                    <i class="fa fa-trash trash-btn"></i>
-                </div>
-            </div>
-            
-
-            <div class="checklist-checkitems-container">
-                <label for="" class="checkitem">
-                    <div class="checkitem-content">
-                        <input type="checkbox">
-                        <div class="checkitem-text">
-                            abhishek
-                        </div>
-                    </div>
-                    <i class="fa fa-trash" style="font-weight: 400; font-size: 1.4rem;"></i>
-                </label>
-            </div>
-
-            
-            <div class="add-card add-item">
-                <i class="fa fa-plus flex"></i> 
-                <span>Add an item</span>
-            </div>
-
-
-        <!-- </div> -->
-    </div>
-    </div>
+        
 
     <div class="list-card-options">
         
@@ -84,9 +49,9 @@ function card() {
             <div class="options-heading">
                 Add to Card
             </div>
-            <div class="add-checklist">
-                <i class="fa fa-list-ul va-mid"></i>
-                <p>Checklist</p>
+            <div class="add-checklist create-checklist">
+                <i class="fa fa-list-ul va-mid create-checklist" ></i>
+                <p class="create-checklist">Checklist</p>
             </div>
         </div>
         <div class="list-card-options-container">

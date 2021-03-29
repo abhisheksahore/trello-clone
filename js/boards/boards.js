@@ -2,6 +2,7 @@ import cardName from './cards.js';
 import list from './list.js';
 import popup from './popup.js';
 import card from './card.js';
+import checklist from './checklist.js';
 
 const KEY = `7bde6646d78097e44a28e72b9b089a19`;
 const TOKEN = `f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`
@@ -81,11 +82,11 @@ const create_new__update = (url, action, action_method, action_element, el, val)
                     }
                 }
                 popup_comp.remove();
-
+                
             } else if (action_element === 'checklist') {
-    
-            } else if (action_element === 'desc') {
-    
+                console.log(el);
+                checklist(el, data.name, data.id);
+                popup_comp.remove();
             }    
         }
     })
@@ -118,6 +119,14 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
             create_new__update(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}&desc=`, 'Update', 'PUT', 'card', document.querySelector('.card-desc-text-container'), document.querySelector('.card-desc-text-container').innerText);
         })
     })
+
+
+
+    const add_a_checklist = document.querySelector('.create-checklist');
+    add_a_checklist.addEventListener('click',function(e) {
+        create_new__update(`https://api.trello.com/1/checklists?key=${KEY}&token=${TOKEN}&idCard=${cardID}&name=`, 'Create', 'POST', 'checklist', document.querySelector('.list-card-content'));
+    })
+
 
     const card_close_btn = document.querySelector('.list-card-close-btn');
     const card_element = document.querySelector('.list-card-container');
