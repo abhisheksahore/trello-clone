@@ -89,7 +89,9 @@ a {
     color: white;
 }
 
-
+.ft-black {
+    color: black;
+}
 
 
 
@@ -437,7 +439,7 @@ form {
     /* background-position: ; */
     background-repeat: no-repeat;
     background-size: cover;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -478,11 +480,17 @@ form {
 }
 
 .lists-container {
-    /* padding: 1rem; */
+    /* padding: 3rem; */
     /* left: 0.5rem; */
     /* position: fixed; */
     column-gap: 2rem;
     display: flex;
+    position: fixed;
+    overflow: auto;
+    top: 9rem;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 .list {
@@ -501,10 +509,24 @@ form {
     flex-direction: column;
     row-gap: .5rem;
     background-color: rgb(243, 243, 243);
+    height: fit-content;
+    transition:all .3s;
 }
+
+.list:hover {
+    transform: scale(1.1);
+}
+
+.list:hover i {
+    display: block;
+}
+
+
 
 .list-title {
     font-weight: 800;
+    width: 100%;
+    text-overflow: hidden;
     /* padding-left: 1rem; */
     /* text-align: center; */
     /* font-family: chango, arial; */
@@ -539,10 +561,12 @@ form {
     background-color: white;
     box-shadow: 2px 2px 5px rgb(156, 156, 156);
     cursor: pointer;
+    transition: all .3s;
 }
 
 .card-name:hover {
     background-color: rgb(250, 250, 250);
+    transform: scale(1.1);
 }
 
 .add-list-container {
@@ -555,6 +579,7 @@ form {
     justify-content: center;
     row-gap: 2rem;
     font-weight: 800;
+    cursor: pointer;
 }
 
 .add-list-container span {
@@ -724,6 +749,7 @@ form {
     font-weight: 700;
     position: absolute;
     right: 0;
+    cursor: pointer;
 }
 
 .list-card-options-container {
@@ -771,3 +797,10 @@ form {
 .del-board-btn i:first-child {
     font-size: 1.1rem;
 }
+
+.list-title-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+

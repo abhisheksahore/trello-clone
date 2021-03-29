@@ -52,7 +52,7 @@ const create_new = (url, action, action_method, el, val) => {
     })
 }
 
-const create_new_card = document.getElementById('create-new-card')
+const create_new_card = document.getElementById('create-new-card');
 create_new_card.addEventListener('click', function() {
     create_new(`https://api.trello.com/1/boards/?key=7bde6646d78097e44a28e72b9b089a19&token=f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08&name=`,'Create', 'POST');
 })
@@ -90,8 +90,15 @@ document.querySelector('.boards-container').addEventListener('click', async func
 
 
     if (e.target.tagName === 'DIV') {
-        console.log(e.target.id)
-        location.href = `./board.html?id=${e.target.id}`;
+        console.log(e.target)
+        let target = e.target;
+        if (e.target.classList.contains('card-heading')){
+            target = e.target.parentElement;
+        }
+        console.log(target)
+        if (target.id !== 'create-new-card') {
+            location.href = `board.html?id=${target.id}`;
+        }
     }
 })
 
@@ -99,6 +106,5 @@ document.querySelector('.boards-container').addEventListener('click', async func
 
 
 
-// FOR board.html
 
 

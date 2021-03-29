@@ -7,10 +7,10 @@ function card() {
         <div class="list-card-heading fd-col">
             <div class="list-card-name-container">
                 <i class="fa fa-folder"></i>
-                <p>Card name</p>
+                <p class="change-card-title">Card name</p>
             </div>
             <div class="in-list-wrapper">
-                in list {List name}
+                in list {<span class='in-list-name'>list name</span>}
             </div>
         </div>
 
@@ -20,25 +20,17 @@ function card() {
                 <div class="list-card-heading">
                     <i class="fa fa-align-justify va-mid"></i>
                     <div class="list-card-name-container">
-                        <p>Description</p>
+                        <p class="desc-edit">Description</p>
                     </div>
                 </div>
                 <div class="desc-edit-btn">
-                    <i class="fa fa-edit"></i>
+                    <i class="fa fa-edit desc-edit"></i>
                 </div>
             </div>
-            <form action="" >
-                <input type="text" placeholder="Card name" name="CardName" id='CardName'>
-                <div class="create-board-btn-container">
-                    <input type="submit" id='submit-card-name' value="Add">
-                    <input type="submit" id='cancel' value="Cancel">
-                </div>
-            </form>
+            
 
             <div class="card-desc-text-container">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, atque error voluptate amet fugiat corporis doloremque impedit cum maiores esse suscipit fuga quibusdam sint vero repellat rem accusamus totam est!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, atque error voluptate amet fugiat corporis doloremque impedit cum maiores esse suscipit fuga quibusdam sint vero repellat rem accusamus totam est!
-                
+                Add Description
             </div>
         </div>
 
@@ -56,13 +48,7 @@ function card() {
                     <i class="fa fa-trash trash-btn"></i>
                 </div>
             </div>
-            <form action="" >
-                <input type="text" placeholder="Card name" name="CardName" id='CardName'>
-                <div class="create-board-btn-container">
-                    <input type="submit" id='submit-card-name' value="Add">
-                    <input type="submit" id='cancel' value="Cancel">
-                </div>
-            </form>
+            
 
             <div class="checklist-checkitems-container">
                 <label for="" class="checkitem">
@@ -76,16 +62,10 @@ function card() {
                 </label>
             </div>
 
-            <form action="" >
-                <input type="text" placeholder="Card name" name="CardName" id='CardName'>
-                <div class="create-board-btn-container">
-                    <input type="submit" id='submit-card-name' value="Add">
-                    <input type="submit" id='cancel' value="Cancel">
-                </div>
-            </form>
+            
             <div class="add-card add-item">
                 <i class="fa fa-plus flex"></i> 
-                <span>Add a card</span>
+                <span>Add an item</span>
             </div>
 
 
