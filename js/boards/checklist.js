@@ -9,8 +9,8 @@ const checklist = (parent_element, checklist_name, id) => {
                                         <p>${checklist_name}</p>
                                     </div>
                                 </div>
-                                <div class="desc-edit-btn">
-                                    <i class="fa fa-trash trash-btn"></i>
+                                <div class="desc-edit-btn ">
+                                    <i class="fa fa-trash trash-btn del-checklist-btn"></i>
                                 </div>
                             </div>
 
@@ -20,7 +20,7 @@ const checklist = (parent_element, checklist_name, id) => {
                                     <div class="checkitem-content">
                                         <input type="checkbox">
                                         <div class="checkitem-text">
-                                            abhishek
+                                            CHECKLIST ITEM HERE
                                         </div>
                                     </div>
                                     <i class="fa fa-trash" style="font-weight: 400; font-size: 1.4rem;"></i>

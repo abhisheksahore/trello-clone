@@ -107,6 +107,15 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
     const promise_card = await fetch(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}`);
     const card_data = await promise_card.json();
     if (card_data.desc !== '') card_desc.innerText = card_data.desc;
+    console.log(card_data);
+    card_data.idChecklists.forEach(async e => {
+        const promise_checklist = await fetch(`https://api.trello.com/1/checklists/${e}?key=${KEY}&token=${TOKEN}`);
+        const checklist_data = await promise_checklist.json();
+        console.log(checklist_data);
+        checklist(document.querySelector('.list-card-content'), checklist_data.name, checklist_data.id);
+
+
+    })
 
     card_title.addEventListener('click', function() {
          create_new__update(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}&name=`, 'Update', 'PUT', 'card', [list_card_element.querySelector('span'), card_title], card_name);
@@ -127,6 +136,8 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
         create_new__update(`https://api.trello.com/1/checklists?key=${KEY}&token=${TOKEN}&idCard=${cardID}&name=`, 'Create', 'POST', 'checklist', document.querySelector('.list-card-content'));
     })
 
+    const del_checklist_btn =document.querySelector('.del-checklist-btn');
+    del_checklist_btn.addEventListener('');
 
     const card_close_btn = document.querySelector('.list-card-close-btn');
     const card_element = document.querySelector('.list-card-container');
