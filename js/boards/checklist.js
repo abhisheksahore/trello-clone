@@ -15,17 +15,7 @@ const checklist = (parent_element, checklist_name, id) => {
                             </div>
 
 
-                            <div class="checklist-checkitems-container">
-                                <label for="" class="checkitem">
-                                    <div class="checkitem-content">
-                                        <input type="checkbox">
-                                        <div class="checkitem-text">
-                                            CHECKLIST ITEM HERE
-                                        </div>
-                                    </div>
-                                    <i class="fa fa-trash" style="font-weight: 400; font-size: 1.4rem;"></i>
-                                </label>
-                            </div>
+                            
 
 
                             <div class="add-card add-item">
