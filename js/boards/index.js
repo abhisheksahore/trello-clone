@@ -100,7 +100,7 @@ document.querySelector('.boards-container').addEventListener('click', async func
             target = e.target.parentElement;
         }
         console.log(target)
-        if (target.id !== 'create-new-card') {
+        if (target.id !== 'create-new-card' && target.id!== '') {
             location.href = `board.html?id=${target.id}`;
         }
     }

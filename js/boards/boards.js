@@ -166,8 +166,8 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
             }) 
             popup_input_text.focus();
             console.log(e.target.parentElement.parentElement.parentElement.id);
-            create_btn.addEventListener('click', async function(e) {
-                e.preventDefault();
+            create_btn.addEventListener('click', async function(event) {
+                event.preventDefault();
                 if (popup_input_text.value === 'CONFIRM') {
                     const promise_del_checklist = await fetch(`https://api.trello.com/1/checklists/${e.target.parentElement.parentElement.parentElement.id}?key=${KEY}&token=${TOKEN}`,{method:'DELETE'});
                     const del_checklist_data = await promise_del_checklist.json();
@@ -195,13 +195,40 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
 
             create_new__update(`https://api.trello.com/1/checklists/${checklist.id}/checkItems?key=${KEY}&token=${TOKEN}&name=`, 'Create', 'POST', 'checkitem', checklist);
         } else if (e.target.classList.contains('del-checkitem')) {
-            // /1/checklists/{id}/checkItems/{idCheckItem}
+            popup();
+            const popup_input_text = document.getElementById('boardName');
+            popup_input_text.placeholder = `Type 'CONFIRM' to delete.`; 
+            const create_btn = document.getElementById('submit-board-name');
+            create_btn.value = "Delete";
+            const popup_comp = document.getElementById('new-board-form-container');
+            console.log(popup_comp);
+            document.getElementById('cancel').addEventListener('click', function(e) {
+                e.preventDefault();
+                popup_comp.remove();
+            }) 
+            popup_input_text.focus();
+            console.log(e.target.parentElement.parentElement.parentElement.id);
+
             const checkitem = e.target.parentElement;
             const checklist = e.target.parentElement.parentElement;
-            const  promise_del_checkitem = await fetch(`https://api.trello.com/1/checklists/${checklist.id}/checkItems/${checkitem.id}?key=${KEY}&token=${TOKEN}`, {method: 'DELETE'});
-            if (promise_del_checkitem.status === 200) {
-                checkitem.remove();
-            }
+
+
+            create_btn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                if (popup_input_text.value === 'CONFIRM') {
+                    
+                    const  promise_del_checkitem = await fetch(`https://api.trello.com/1/checklists/${checklist.id}/checkItems/${checkitem.id}?key=${KEY}&token=${TOKEN}`, {method: 'DELETE'});
+                    if (promise_del_checkitem.status === 200) {
+                        checkitem.remove();
+                        popup_comp.remove();
+                    }
+                } else {
+                    popup_input_text.value = '';
+                    popup_input_text.style.borderColor = 'tomato';
+                    popup_input_text.placeholder = `Please type 'CONFORM' to Delete.`;
+                }
+            })
+
         } else if (e.target.classList.contains('checkbox')) {
             let checkitem = e.target.parentElement.parentElement.parentElement;
             let checklist = e.target.parentElement.parentElement.parentElement.parentElement;
@@ -213,6 +240,9 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
         }
     });
 
+
+    //  CLOSE THE CARD
+
     const card_close_btn = document.querySelector('.list-card-close-btn');
     const card_element = document.querySelector('.list-card-container');
     console.log(card_close_btn);
@@ -221,6 +251,46 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
     })
 
 
+    // DELETE THE CARD
+
+    const del_card = document.querySelector('.del-card');
+    del_card.addEventListener('click', async function(e) {
+        popup();
+        const popup_input_text = document.getElementById('boardName');
+        popup_input_text.placeholder = `Type 'CONFIRM' to delete.`; 
+        const create_btn = document.getElementById('submit-board-name');
+        create_btn.value = "Delete";
+        const popup_comp = document.getElementById('new-board-form-container');
+        console.log(popup_comp);
+        document.getElementById('cancel').addEventListener('click', function(e) {
+            e.preventDefault();
+            popup_comp.remove();
+        }) 
+        popup_input_text.focus();
+        console.log(e.target.parentElement.parentElement.parentElement.id);
+
+        const checkitem = e.target.parentElement;
+        const checklist = e.target.parentElement.parentElement;
+
+
+        create_btn.addEventListener('click', async function(e) {
+            e.preventDefault();
+            if (popup_input_text.value === 'CONFIRM') {
+                const  promise_del_card = await fetch(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}`, {method: 'DELETE'});
+                if (promise_del_card.status === 200) {
+                    list_card_element.remove();
+                    popup_comp.remove();
+                    card_element.remove();
+                }
+            } else {
+                popup_input_text.value = '';
+                popup_input_text.style.borderColor = 'tomato';
+                popup_input_text.placeholder = `Please type 'CONFORM' to Delete.`;
+            }
+        })
+        
+
+    })
 
 }
 
@@ -278,19 +348,45 @@ lists_container.addEventListener('click', async function(e) {
         open_card(list.id, card.id, list.querySelector('.list-title').innerText, card.querySelector('span').innerText, list, card);
     } else if (e.target.tagName === 'I') {
         if (e.target.parentElement.firstElementChild === e.target && e.target.classList.contains('del-l')) {
-            
-            
-            // DELETE            
-            console.log('ready to delete')
-            console.log(e.target.parentElement.parentElement.parentElement.id)
-            const promise_delete_list = await fetch(`https://api.trello.com/1/lists/${e.target.parentElement.parentElement.parentElement.id}/closed?key=${KEY}&token=${TOKEN}&value=true`, {method: 'PUT'});
-            const data_delete_list = await promise_delete_list.json();
-            if (data_delete_list.closed === true) {
-                e.target.parentElement.parentElement.parentElement.remove();
-            } else {
-                console.log('list not deleted.');
-            }
+            popup();
+            const popup_input_text = document.getElementById('boardName');
+            popup_input_text.placeholder = `Type 'CONFIRM' to delete.`; 
+            const create_btn = document.getElementById('submit-board-name');
+            create_btn.value = "Delete";
+            const popup_comp = document.getElementById('new-board-form-container');
+            console.log(popup_comp);
+            document.getElementById('cancel').addEventListener('click', function(e) {
+                e.preventDefault();
+                popup_comp.remove();
+            }) 
+            popup_input_text.focus();
+            console.log(e.target.parentElement.parentElement.parentElement.id);
 
+            const checkitem = e.target.parentElement;
+            const checklist = e.target.parentElement.parentElement;
+
+
+            create_btn.addEventListener('click', async function(event) {
+                event.preventDefault();
+                if (popup_input_text.value === 'CONFIRM') {
+            
+                    // DELETE            
+                    console.log('ready to delete')
+                    console.log(e.target.parentElement.parentElement.parentElement.id)
+                    const promise_delete_list = await fetch(`https://api.trello.com/1/lists/${e.target.parentElement.parentElement.parentElement.id}/closed?key=${KEY}&token=${TOKEN}&value=true`, {method: 'PUT'});
+                    const data_delete_list = await promise_delete_list.json();
+                    if (promise_delete_list.status === 200) {
+                        e.target.parentElement.parentElement.parentElement.remove();
+                        popup_comp.remove();
+                    } else {
+                        console.log('list not deleted.');
+                    }          
+                } else {
+                    popup_input_text.value = '';
+                    popup_input_text.style.borderColor = 'tomato';
+                    popup_input_text.placeholder = `Please type 'CONFORM' to Delete.`;
+                }
+            })
 
 
         } else if (e.target.parentElement.lastElementChild === e.target && e.target.classList.contains('edit-l')) {

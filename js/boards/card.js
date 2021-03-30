@@ -66,6 +66,10 @@ function card() {
                 <i class="fa fa-copy va-mid"></i>
                 <p>Copy</p>
             </div>
+            <div class="add-checklist del-card">
+                <i class="fa fa-trash va-mid"></i>
+                <p>Delete</p>
+            </div>
         </div>
 
     </div>
