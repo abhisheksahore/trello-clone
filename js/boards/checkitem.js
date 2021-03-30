@@ -1,11 +1,17 @@
-const checkitem = (parent_element, checkitem_name, id) => {
+const checkitem = (parent_element, checkitem_name, id, status) => {
     const checkitem = document.createElement('div');
     checkitem.id = id;
+    let checked;
+    if (status === 'complete') {
+        checked = 'checked'; 
+    } else {
+        checked = ''; 
+    }
     checkitem.classList.add('checklist-checkitems-container');
     checkitem.classList.add('fl-sb');
     checkitem.innerHTML = ` <label class="checkitem">
                                 <div class="checkitem-content">
-                                    <input type="checkbox">
+                                    <input type="checkbox" class='checkbox' ${checked}>
                                     <div class="checkitem-text">
                                         ${checkitem_name}
                                     </div>

@@ -1,12 +1,14 @@
 import board from './board.js';
 import popup from './popup.js';
 
+const KEY = `7bde6646d78097e44a28e72b9b089a19`;
+const TOKEN = `f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`
 
 
 
 // loads the boards on loading the page each time.
 window.addEventListener('load', async function(e) {
-    const promise_get = await fetch(`https://api.trello.com/1/members/abhisheksahore7/boards/?key=7bde6646d78097e44a28e72b9b089a19&token=f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`);
+    const promise_get = await fetch(`https://api.trello.com/1/members/abhisheksahore7/boards/?key=${KEY}&token=${TOKEN}`);
     const get_data = await promise_get.json();
     console.log(get_data);
     get_data.forEach(e => board(e.name, e.id))
