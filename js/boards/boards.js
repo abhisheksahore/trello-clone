@@ -337,8 +337,9 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
                     if (popup_input_text.value === 'CONFIRM MOVE') {
                         const promise_move_card = await fetch(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}&idList=${e.target.id}`, {method: 'PUT'});
                         const data_move_card = await promise_move_card.json();
-                        cardName(data_move_card.name, document.getElementById(data_move_card.idList), data_move_card.id);
                         document.getElementById(cardID).remove();
+                        cardName(data_move_card.name, document.getElementById(data_move_card.idList), data_move_card.id);
+                        console.log(document.getElementById(cardID));
                         popup_comp.remove();
                         select_all_lists.remove();
                         document.querySelector('.list-card-container').remove();
