@@ -24,6 +24,7 @@ const create_new = (url, action, action_method, el, val) => {
     if (action === 'Update') {
         popup_input_text.value = val;
     }
+    popup_input_text.focus();
     const create_btn = document.getElementById('submit-board-name');
     create_btn.value = action;
     const popup_comp = document.getElementById('new-board-form-container');
@@ -32,6 +33,7 @@ const create_new = (url, action, action_method, el, val) => {
         e.preventDefault();
         popup_comp.remove();
     })
+    
     create_btn.addEventListener('click', async function(e) {
         e.preventDefault();
         if(popup_input_text.value !== '' && popup_input_text.value !== null) {

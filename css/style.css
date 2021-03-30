@@ -825,3 +825,12 @@ form {
 }
 
 
+.del-checkitem {
+    transition: all .05s;
+    cursor: pointer;
+}
+
+.del-checkitem:hover {
+    transform: scale(1.15);
+    color: blue;
+}

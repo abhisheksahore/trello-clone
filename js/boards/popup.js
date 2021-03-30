@@ -13,7 +13,7 @@ const popup = () => {
     input_text.setAttribute('placeholder', 'Board Name');
     input_text.setAttribute('name', 'boardname');
     input_text.setAttribute('id', 'boardName');
-    
+    input_text.setAttribute('autofocus', 'true');
     const create_board_btn_container = document.createElement('div');
     create_board_btn_container.classList.add('create-board-btn-container');
     
@@ -34,7 +34,7 @@ const popup = () => {
     form.append(create_board_btn_container);
     new_board_form_wrapper.append(form);
     new_board_form_container.append(new_board_form_wrapper);
-
+    
     document.body.append(new_board_form_container);
 
 
