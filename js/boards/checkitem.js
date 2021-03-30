@@ -12,7 +12,7 @@ const checkitem = (parent_element, checkitem_name, id) => {
                                 </div>
                                 
                             </label>
-                            <i class="fa fa-trash" style="font-weight: 400; font-size: 1.4rem;"></i>`;
+                            <i class="fa fa-trash del-checkitem" style="font-weight: 400; font-size: 1.4rem;"></i>`;
     parent_element.insertBefore(checkitem, parent_element.lastElementChild);
 }
 

@@ -88,6 +88,7 @@ a {
 .fl-sb {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .ft-white {

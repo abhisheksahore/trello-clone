@@ -122,7 +122,7 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
 
         checklist(document.querySelector('.list-card-content'), checklist_data.name, checklist_data.id);
         checkitems_data.forEach(e => {
-            checkitem(document.getElementById(e.idChecklist), e.name, e.id)
+            checkitem(document.getElementById(e.idChecklist), e.name, e.id);
         })
 
     })
@@ -169,6 +169,14 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
             console.log(checklist.id)
 
             create_new__update(`https://api.trello.com/1/checklists/${checklist.id}/checkItems?key=${KEY}&token=${TOKEN}&name=`, 'Create', 'POST', 'checkitem', checklist);
+        } else if (e.target.classList.contains('del-checkitem')) {
+            // /1/checklists/{id}/checkItems/{idCheckItem}
+            const checkitem = e.target.parentElement;
+            const checklist = e.target.parentElement.parentElement;
+            const  promise_del_checkitem = await fetch(`https://api.trello.com/1/checklists/${checklist.id}/checkItems/${checkitem.id}?key=${KEY}&token=${TOKEN}`, {method: 'DELETE'});
+            if (promise_del_checkitem.status === 200) {
+                checkitem.remove();
+            }
         }
     });
 
