@@ -836,3 +836,68 @@ form {
     transform: scale(1.15);
     color: blue;
 }
+
+.all-lists-container {
+    height: fit-content;
+    min-height: 200px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 400px;
+    row-gap: 2rem;
+    font-weight: 800;
+}
+
+.all-lists-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: .5rem;
+    width: 100%;    
+}
+
+
+.dark-blurry-background {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.all-lists {
+    background-color: rgb(184, 184, 184);
+    padding: .2rem .7rem;
+    border-radius: 5px;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all .3s;
+    width: 100%;
+}
+
+.all-lists:hover {
+    transform: scale(1.05);
+    background-color: rgb(136, 136, 136);
+}
+
+.all-lists-title {
+    height: fit-content;
+}
+
+.all-lists-title-and-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.all-lists-close {
+    padding: .2rem .5rem;
+    background-color: rgb(255, 105, 79);
+    border-radius: 5px;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: white;
+}
+
+.all-lists-close:hover {
+    background-color: rgb(255, 78, 47);
+    transform: scale(1.05);
+}

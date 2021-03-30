@@ -4,6 +4,8 @@ import popup from './popup.js';
 import card from './card.js';
 import checklist from './checklist.js';
 import checkitem from './checkitem.js';
+import all_lists from './allLists.js';
+import allListsList from './allListsList.js';
 
 const KEY = `7bde6646d78097e44a28e72b9b089a19`;
 const TOKEN = `f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`
@@ -289,6 +291,27 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
             }
         })
         
+
+    })
+
+
+    // MOVE THE CARD
+
+    const move_card = document.querySelector('.move-card');
+    move_card.addEventListener('click', async function(e) {
+        all_lists();
+        const all_lists_close_btn = document.querySelector('.all-lists-close');
+        const main_element = document.querySelector('.dark-blurry-background');
+        const all_lists_wrapper = document.querySelector('.all-lists-wrapper');
+        all_lists_close_btn.addEventListener('click', function() {
+            main_element.remove();  
+        })
+        const promise_all_lists = await fetch(`https://api.trello.com/1/boards/${ID}/lists?key=${KEY}&token=${TOKEN}`);
+        const all_lists_data = await promise_all_lists.json();
+        console.log(all_lists_data);
+        all_lists_data.forEach(e => {
+            allListsList(all_lists_wrapper, e.id, e.name);  
+        })
 
     })
 

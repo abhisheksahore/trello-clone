@@ -58,7 +58,7 @@ function card() {
             <div class="options-heading">
                 Actions
             </div>
-            <div class="add-checklist">
+            <div class="add-checklist move-card">
                 <i class="fa fa-arrow-right va-mid"></i>
                 <p>Move</p>
             </div>
