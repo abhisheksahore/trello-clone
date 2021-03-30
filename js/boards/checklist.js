@@ -18,9 +18,9 @@ const checklist = (parent_element, checklist_name, id) => {
                             
 
 
-                            <div class="add-card add-item">
-                                <i class="fa fa-plus flex"></i> 
-                                <span>Add an item</span>
+                            <div class="add-card add-item add-checklist-item">
+                                <i class="fa fa-plus flex add-checklist-item"></i> 
+                                <span class="add-checklist-item">Add an item</span>
                             </div>`; 
     parent_element.append(checklist)
 }

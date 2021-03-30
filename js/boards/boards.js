@@ -3,6 +3,7 @@ import list from './list.js';
 import popup from './popup.js';
 import card from './card.js';
 import checklist from './checklist.js';
+import checkitem from './checkitem.js';
 
 const KEY = `7bde6646d78097e44a28e72b9b089a19`;
 const TOKEN = `f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`
@@ -87,7 +88,10 @@ const create_new__update = (url, action, action_method, action_element, el, val)
                 console.log(el);
                 checklist(el, data.name, data.id);
                 popup_comp.remove();
-            }    
+            } else if (action_element === 'checkitem') {
+                checkitem(el, data.name, data.id);
+            }   
+            popup_comp.remove();
         }
     })
 }
@@ -110,10 +114,16 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
     console.log(card_data);
     card_data.idChecklists.forEach(async e => {
         const promise_checklist = await fetch(`https://api.trello.com/1/checklists/${e}?key=${KEY}&token=${TOKEN}`);
+        const promise_checkitems = await fetch(`https://api.trello.com/1/checklists/${e}/checkItems?key=${KEY}&token=${TOKEN}`);
+        const checkitems_data = await promise_checkitems.json();
         const checklist_data = await promise_checklist.json();
         console.log(checklist_data);
-        checklist(document.querySelector('.list-card-content'), checklist_data.name, checklist_data.id);
+        console.log(checkitems_data)
 
+        checklist(document.querySelector('.list-card-content'), checklist_data.name, checklist_data.id);
+        checkitems_data.forEach(e => {
+            checkitem(document.getElementById(e.idChecklist), e.name, e.id)
+        })
 
     })
 
@@ -149,6 +159,16 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
             if (promise_del_checklist.status === 200) {
                 e.target.parentElement.parentElement.parentElement.remove();
             }
+        } else if (e.target.classList.contains('add-checklist-item')) {
+            let checklist = e.target;
+            if (e.target.tagName === 'DIV') {
+                checklist = e.target.parentElement;
+            } else {
+                checklist = e.target.parentElement.parentElement;
+            }
+            console.log(checklist.id)
+
+            create_new__update(`https://api.trello.com/1/checklists/${checklist.id}/checkItems?key=${KEY}&token=${TOKEN}&name=`, 'Create', 'POST', 'checkitem', checklist);
         }
     });
 

@@ -2,16 +2,18 @@ const checkitem = (parent_element, checkitem_name, id) => {
     const checkitem = document.createElement('div');
     checkitem.id = id;
     checkitem.classList.add('checklist-checkitems-container');
-    checkitem.innerHTML = ` <label for="" class="checkitem">
+    checkitem.classList.add('fl-sb');
+    checkitem.innerHTML = ` <label class="checkitem">
                                 <div class="checkitem-content">
                                     <input type="checkbox">
                                     <div class="checkitem-text">
                                         ${checkitem_name}
                                     </div>
                                 </div>
-                                <i class="fa fa-trash" style="font-weight: 400; font-size: 1.4rem;"></i>
-                            </label>`;
-    parent_element.append(checkitem);
+                                
+                            </label>
+                            <i class="fa fa-trash" style="font-weight: 400; font-size: 1.4rem;"></i>`;
+    parent_element.insertBefore(checkitem, parent_element.lastElementChild);
 }
 
 export default checkitem;
