@@ -303,14 +303,54 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
         const all_lists_close_btn = document.querySelector('.all-lists-close');
         const main_element = document.querySelector('.dark-blurry-background');
         const all_lists_wrapper = document.querySelector('.all-lists-wrapper');
+        const select_all_lists = document.querySelector('.dark-blurry-background');
         all_lists_close_btn.addEventListener('click', function() {
             main_element.remove();  
         })
         const promise_all_lists = await fetch(`https://api.trello.com/1/boards/${ID}/lists?key=${KEY}&token=${TOKEN}`);
         const all_lists_data = await promise_all_lists.json();
-        console.log(all_lists_data);
+        console.log('all list: ', all_lists_data);
         all_lists_data.forEach(e => {
-            allListsList(all_lists_wrapper, e.id, e.name);  
+            if (!(listID === e.id)) {
+                allListsList(all_lists_wrapper, e.id, e.name);  
+            }
+        })
+        
+        all_lists_wrapper.addEventListener('click', async function(e) {
+            if (e.target.classList.contains('all-lists')) {
+                console.log(e.target);
+                popup();
+                const popup_input_text = document.getElementById('boardName');
+                popup_input_text.placeholder = `Type 'CONFIRM MOVE' to Move.`; 
+                const create_btn = document.getElementById('submit-board-name');
+                create_btn.value = "Move";
+                const popup_comp = document.getElementById('new-board-form-container');
+                console.log(popup_comp);
+                document.getElementById('cancel').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popup_comp.remove();
+                }) 
+                popup_input_text.focus();
+                console.log(e.target.parentElement.parentElement.parentElement.id);
+                create_btn.addEventListener('click', async function(event) {
+                    event.preventDefault();
+                    if (popup_input_text.value === 'CONFIRM MOVE') {
+                        const promise_move_card = await fetch(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}&idList=${e.target.id}`, {method: 'PUT'});
+                        const data_move_card = await promise_move_card.json();
+                        cardName(data_move_card.name, document.getElementById(data_move_card.idList), data_move_card.id);
+                        document.getElementById(cardID).remove();
+                        popup_comp.remove();
+                        select_all_lists.remove();
+                        document.querySelector('.list-card-container').remove();
+                        console.log('YOU HAVE CONFIRMED THE MOVE!')
+                    } else {
+                        popup_input_text.value = '';
+                        popup_input_text.style.borderColor = 'tomato';
+                        popup_input_text.placeholder = `Please type 'CONFORM MOVE' to Move.`
+                    }
+                });
+
+            }
         })
 
     })
