@@ -529,6 +529,12 @@ form {
     display: block;
 }
 
+.list:hover .add-card-btn i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 .list-title {
@@ -900,4 +906,10 @@ form {
 .all-lists-close:hover {
     background-color: rgb(255, 78, 47);
     transform: scale(1.05);
+}
+
+.add-list-container:hover i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
