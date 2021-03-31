@@ -113,6 +113,7 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
     in_list_name.innerText = list_name;
     const promise_card = await fetch(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}`);
     const card_data = await promise_card.json();
+    console.log('card data is : ',  card_data);
     if (card_data.desc !== '') card_desc.innerText = card_data.desc;
     console.log(card_data);
     card_data.idChecklists.forEach(async e => {
@@ -300,13 +301,10 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
     const move_card = document.querySelector('.move-card');
     move_card.addEventListener('click', async function(e) {
         all_lists();
-        const all_lists_close_btn = document.querySelector('.all-lists-close');
         const main_element = document.querySelector('.dark-blurry-background');
+        const all_lists_close_btn = main_element.querySelector('.all-lists-close');
         const all_lists_wrapper = document.querySelector('.all-lists-wrapper');
         const select_all_lists = document.querySelector('.dark-blurry-background');
-        all_lists_close_btn.addEventListener('click', function() {
-            main_element.remove();  
-        })
         const promise_all_lists = await fetch(`https://api.trello.com/1/boards/${ID}/lists?key=${KEY}&token=${TOKEN}`);
         const all_lists_data = await promise_all_lists.json();
         console.log('all list: ', all_lists_data);
@@ -315,7 +313,14 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
                 allListsList(all_lists_wrapper, e.id, e.name);  
             }
         })
-        
+        console.log('before event')
+        console.log(all_lists_close_btn);
+
+        all_lists_close_btn.addEventListener('click', function() {
+            console.log('between event');
+            main_element.remove();  
+        })
+        console.log('after event')
         all_lists_wrapper.addEventListener('click', async function(e) {
             if (e.target.classList.contains('all-lists')) {
                 console.log(e.target);
@@ -356,7 +361,102 @@ const open_card = async (listID, cardID, list_name, card_name, list_element, lis
 
     })
 
+
+
+
+    // COPY CARD FROM ONE LIST TO ANOTHER
+
+    const copy_card = document.querySelector('.copy-card');
+    copy_card.addEventListener('click', async function(e) {
+        all_lists();
+        const main_element = document.querySelector('.dark-blurry-background');
+        const all_lists_close_btn = main_element.querySelector('.all-lists-close');
+        const all_lists_wrapper = document.querySelector('.all-lists-wrapper');
+        const select_all_lists = document.querySelector('.dark-blurry-background');
+        console.log(all_lists_close_btn);
+        all_lists_close_btn.addEventListener('click', function() {
+            main_element.remove();  
+        })
+        const promise_all_lists = await fetch(`https://api.trello.com/1/boards/${ID}/lists?key=${KEY}&token=${TOKEN}`);
+        const all_lists_data = await promise_all_lists.json();
+        console.log('all list: ', all_lists_data);
+        all_lists_data.forEach(element => {
+            allListsList(all_lists_wrapper, element.id, element.name);  
+        })
+        
+        all_lists_wrapper.addEventListener('click', async function(event) {
+            if (event.target.classList.contains('all-lists')) {
+                console.log(event.target);
+                popup();
+                const popup_input_text = document.getElementById('boardName');
+                popup_input_text.placeholder = `Type 'CONFIRM COPY' to copy.`; 
+                const create_btn = document.getElementById('submit-board-name');
+                create_btn.value = "Copy";
+                const popup_comp = document.getElementById('new-board-form-container');
+                console.log(popup_comp);
+                document.getElementById('cancel').addEventListener('click', function(event_cancel) {
+                    event_cancel.preventDefault();
+                    popup_comp.remove();
+                }) 
+                popup_input_text.focus();
+                create_btn.addEventListener('click', async function(event_create_btn) {
+                    event_create_btn.preventDefault();
+                    if (popup_input_text.value === 'CONFIRM COPY') {
+                        console.log(`YOU HAVE CONFIRMED THE COPY COMMAND!`);
+                        console.log(document.getElementById(cardID).innerText);
+
+                        //  CREATING NEW COPY OF CARD IN LIST
+                        const promise_create_new_card = await fetch(`https://api.trello.com/1/cards?key=${KEY}&token=${TOKEN}&idList=${event.target.id}&name=${document.getElementById(cardID).innerText}`, {method: "POST"});
+                        const new_card_data = await promise_create_new_card.json();
+                        cardName( new_card_data.name, document.getElementById(event.target.id), new_card_data.id);
+                        const new_card = document.getElementById(new_card_data.id);
+                        console.log('newly created card : ', new_card);
+
+
+                        // READING OLD CARD 
+                        const promise_old_card = await fetch(`https://api.trello.com/1/cards/${cardID}?key=${KEY}&token=${TOKEN}`)
+                        const old_card_data = await promise_old_card.json();
+                        console.log('old card data: ', old_card_data);
+
+                        // UPDATING DESCRIPTION OF THE NEW CARD
+                        await fetch(`https://api.trello.com/1/cards/${new_card_data.id}?key=${KEY}&token=${TOKEN}&desc=${old_card_data.desc}`, {method: 'PUT'});
+
+
+                        // FETCHING THE OLD CARD'S CHECKLISTS IN FOREACH LOOP
+                        old_card_data.idChecklists.forEach(async cl_id => {
+                            
+                            const promise_get_old_checklist = await fetch(`https://api.trello.com/1/checklists/${cl_id}?key=${KEY}&token=${TOKEN}`)
+                            const data_old_checklist = await promise_get_old_checklist.json();
+                            console.log('OLD CHECK LIST IS HERE',data_old_checklist);    
+                            const promise_create_checklist = await fetch(`https://api.trello.com/1/checklists?key=${KEY}&token=${TOKEN}&idCard=${new_card_data.id}&name=${data_old_checklist.name}`, {method: 'POST'});
+                            const new_checklist = await promise_create_checklist.json();
+                            
+                            // ITERATE OVER THE CKECKITEMS OF OLD CHECKLIST
+                            data_old_checklist.checkItems.forEach(async ci => {
+                                await fetch(`https://api.trello.com/1/checklists/${new_checklist.id}/checkItems?key=${KEY}&token=${TOKEN}&name=${ci.name}&checked=${(ci.state === 'incomplete')? false: true}`, {method: 'POST'});
+                            })
+                            
+                        })
+
+                        popup_comp.remove();
+                        main_element.remove();
+                        document.querySelector('.list-card-container').remove();
+                        console.log('CARD HAS BEEN COPIED!');
+                    } else {
+                        popup_input_text.value = '';
+                        popup_input_text.style.borderColor = 'tomato';
+                        popup_input_text.placeholder = `Please type 'CONFORM COPY' to copy.`
+                    }
+                });
+
+            }
+        })
+
+    })
+
+
 }
+
 
 
 

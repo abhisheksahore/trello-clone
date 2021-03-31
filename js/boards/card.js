@@ -41,7 +41,7 @@ function card() {
     <div class="list-card-options">
         
         <div class="close-btn-wrapper">
-            <div class="list-card-close-btn">
+            <div class="list-card-close-btn all-lists-close">
                 Close
             </div>
         </div>
@@ -62,7 +62,7 @@ function card() {
                 <i class="fa fa-arrow-right va-mid"></i>
                 <p>Move</p>
             </div>
-            <div class="add-checklist">
+            <div class="add-checklist copy-card">
                 <i class="fa fa-copy va-mid"></i>
                 <p>Copy</p>
             </div>

@@ -22,7 +22,7 @@ const checklist = (parent_element, checklist_name, id) => {
                                 <i class="fa fa-plus flex add-checklist-item"></i> 
                                 <span class="add-checklist-item">Add an item</span>
                             </div>`; 
-    parent_element.append(checklist)
+    parent_element.append(checklist);
 }
 
 export default checklist;
