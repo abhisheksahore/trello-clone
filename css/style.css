@@ -64,7 +64,7 @@ li {
     border-radius: 5px;
     box-shadow: 4px 4px 30px rgb(182, 182, 182);
     /* padding-top: 2rem; */
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgb(241, 241, 241);
 }
 
 a {
@@ -479,9 +479,9 @@ form {
 
 .board-name {
     padding: .4rem 1.5rem;
-    background-color:tomato;
+    background-color:rgba(0, 0, 0, .3);
     /* width: 100px; */
-    border-radius: 100px;
+    border-radius: 8px;
     font-size: 1.5rem;
     font-weight: 800;
     /* border: 2px solid black; */
