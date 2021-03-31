@@ -10,7 +10,7 @@ const popup = () => {
     
     const input_text = document.createElement('input');
     input_text.setAttribute('type', 'text');
-    input_text.setAttribute('placeholder', 'Board Name');
+    input_text.setAttribute('placeholder', 'Name');
     input_text.setAttribute('name', 'boardname');
     input_text.setAttribute('id', 'boardName');
     input_text.setAttribute('autofocus', 'true');

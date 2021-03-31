@@ -74,13 +74,36 @@ document.querySelector('.boards-container').addEventListener('click', async func
     if(e.target.tagName === 'I') {
         e.stopPropagation();
         if (e.target.parentElement.firstElementChild === e.target) {
-            const promise = await fetch(`https://api.trello.com/1/boards/${e.target.parentElement.parentElement.id}/?key=7bde6646d78097e44a28e72b9b089a19&token=f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`,{
-                method: 'DELETE',
-            })
-            const data = await promise.json();
-            e.target.parentElement.parentElement.remove();
-            console.log(data);  
-            console.log('working');
+            popup();
+            const popup_input_text = document.getElementById('boardName');
+            popup_input_text.placeholder = `Type 'CONFIRM' to delete.`; 
+            const create_btn = document.getElementById('submit-board-name');
+            create_btn.value = "Delete";
+            const popup_comp = document.getElementById('new-board-form-container');
+            console.log(popup_comp);
+            document.getElementById('cancel').addEventListener('click', function(e) {
+                e.preventDefault();
+                popup_comp.remove();
+            }) 
+            popup_input_text.focus();
+            console.log(e.target.parentElement.parentElement.parentElement.id);
+            create_btn.addEventListener('click', async function(event) {
+                event.preventDefault();
+                if (popup_input_text.value === 'CONFIRM') {
+                    const promise = await fetch(`https://api.trello.com/1/boards/${e.target.parentElement.parentElement.id}/?key=7bde6646d78097e44a28e72b9b089a19&token=f1599e0d17ee6befeb05784c72fcfe8529f481f92ef31162e6671b361f89bb08`,{
+                        method: 'DELETE',
+                    })
+                    const data = await promise.json();
+                    e.target.parentElement.parentElement.remove();
+                    console.log(data);  
+                    console.log('working');
+                    popup_comp.remove();
+                } else {
+                    popup_input_text.value = '';
+                    popup_input_text.style.borderColor = 'tomato';
+                    popup_input_text.placeholder = `Please type 'CONFORM' to delete.`
+                }
+            });
         } else if (e.target.parentElement.lastElementChild === e.target) {
             
             e.stopPropagation();
