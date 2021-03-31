@@ -494,7 +494,7 @@ form {
     column-gap: 2rem;
     display: flex;
     position: fixed;
-    overflow: auto;
+    overflow-x: auto;
     top: 9rem;
     left: 0;
     bottom: 0;
@@ -519,10 +519,12 @@ form {
     background-color: rgb(243, 243, 243);
     height: fit-content;
     transition:all .3s;
+    max-height: 50rem;
+    overflow-y: auto;
 }
 
 .list:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
 
 .list:hover i {
